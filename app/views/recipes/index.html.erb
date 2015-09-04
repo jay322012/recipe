@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Recipes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Rating</th>
+      <th>Instructions</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+<br>
+<div class="row">
+  <% @recipes.each do |recipe| %>
+   <div class="col-md-6">
+      <div class="well"> 
+      <h2><%= link_to recipe.title, recipe %></h2>
+       <p>
+        <% "#{recipe.rating}".to_i.times do %>
+         <span class="glyphicon glyphicon-star"></span>
+        <% end %>
+       </p>
+      
+      Created by chef: <% recipe.user_id %>
+      
+      <h4><%= link_to edit_recipe_path(recipe) do %>
+            <span class="glyphicon glyphicon-pencil"></span>
+          <% end %>
+          
+          <%= link_to recipe, method: :delete, data: { confirm: 'Are you sure?' } do %>
+             <span class="glyphicon glyphicon-trash"></span>
+          <% end %>
+          </h4> 
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to 'New Recipe', new_recipe_path %>
+
+
