@@ -1,28 +1,32 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Recipes</h1>
+<h1>All Recipes</h1>
+<p>
+<%= link_to  new_recipe_path do %>
+     <span class="glyphicon glyphicon-plus"></span> Add New Recipe
+<% end %>
+</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Rating</th>
-      <th>Instructions</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-<br>
 <div class="row">
   <% @recipes.each do |recipe| %>
    <div class="col-md-6">
       <div class="well"> 
       <h2><%= link_to recipe.title, recipe %></h2>
        <p>
+           <!--this is the code that does the ratings, and sets the icon to a fork, and makes the fork yellow in color-->
         <% "#{recipe.rating}".to_i.times do %>
-         <span class="glyphicon glyphicon-star"></span>
+         <!--<span class="glyphicon glyphicon-star"></span>-->
+         <span><i class="ionicons ion-fork yellow"></i></span>
         <% end %>
+                <!--end of rating related code-->
        </p>
+      
+        <div class="panel-body">
+           
+            <p><%= recipe.instructions[0..250] %>...[ <%= link_to "READ MORE", recipe %> ]
+
+            <p><strong><%=recipe.updated_at.strftime('%d %B %Y %H:%M:%S') %></strong></p>
+          </div>
       
       Created by chef: <% recipe.user_id %>
       
@@ -39,6 +43,8 @@
   <% end %>
 </div>
 
-<%= link_to 'New Recipe', new_recipe_path %>
+<%= link_to  new_recipe_path do %>
+     <span class="glyphicon glyphicon-plus"></span> Add New Recipe
+<% end %>
 
 
